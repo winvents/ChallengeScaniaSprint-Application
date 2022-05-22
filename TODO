@@ -1,19 +1,17 @@
 PROJETO:
     - Fonte
     - Tema
-
+        -> Cor dos botões
+        -> Cor do menu
+        ->
 
 COMPONENTES:
-    - StandardMenu
     - StandardForm
     - StandardCard
-    - StandardLogo
 
 PÁGINAS:
     INTRO 
-        - Logo Scania na página (StandardLogo or AppBar)
-        - Arrumar cor e fonte dos textos
-        - Posição de todos os objetos na página.
+        -> Textinho intro
 
     COTAÇÃO
 

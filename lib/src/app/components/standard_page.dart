@@ -11,7 +11,35 @@ class StandardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title)
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+                colors: <Color>[Colors.black, Color.fromARGB(206, 0, 0, 0)]),
+          ),
+        ),
+        // backgroundColor: Color.fromARGB(255, 13, 13, 13),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/images/scanialogo.png',
+              fit: BoxFit.cover,
+              height: 40,
+            ),
+            SizedBox(
+              width: 5,
+            ),
+            Text(
+              title,
+              style: TextStyle(fontSize: 35),
+            ),
+            SizedBox(
+              width: 40,
+            ),
+          ],
+        ),
       ),
       body: Padding(
           padding: EdgeInsets.only(
@@ -22,6 +50,32 @@ class StandardPage extends StatelessWidget {
           child: SingleChildScrollView(
             child: body,
           )),
+      bottomNavigationBar: BottomNavigationBar(
+        mouseCursor: SystemMouseCursors.grab,
+        backgroundColor: Color.fromARGB(255, 77, 77, 77),
+        iconSize: 30,
+        selectedIconTheme: IconThemeData(color: Colors.white),
+        selectedItemColor: Colors.white,
+        selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+        unselectedIconTheme: IconThemeData(
+          color: Color.fromARGB(255, 48, 47, 47),
+        ),
+        unselectedItemColor: Color.fromARGB(255, 48, 47, 47),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.history),
+            label: 'Histórico',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.add),
+            label: 'Nova Cotação',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_cart_outlined),
+            label: 'Consultar vendas',
+          ),
+        ],
+      ),
     );
   }
 }

@@ -1,11 +1,12 @@
 import 'package:challengescania_sprint2/src/app/modules/intropage/intro_page.dart';
+import 'package:challengescania_sprint2/src/theme/theme_constants.dart';
 import 'package:flutter/material.dart';
 
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // theme: lightTheme,
+      theme: lightTheme,
       home: IntroPage(),
     );
   }
