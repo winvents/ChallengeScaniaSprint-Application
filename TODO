@@ -1,22 +1,12 @@
-PROJETO:
-    - Fonte
-    - Tema
-        -> Cor dos botões
-        -> Cor do menu
-        ->
+PROJETO: - Fonte - Tema
 
-COMPONENTES:
-    - StandardForm
-    - StandardCard
+COMPONENTES: - StandardForm - StandardCard
 
 PÁGINAS:
-    INTRO 
-        -> Textinho intro
+LISTADECOTAÇÕES (home) - Botão de open (tamanho e cor), 
 
-    COTAÇÃO
+COTAÇÃO
 
-    NOVACOTAÇÃO
+NOVACOTAÇÃO
 
-    LISTADECOTAÇÕES
-
-    VENDA
+VENDA

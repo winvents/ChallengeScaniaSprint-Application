@@ -16,7 +16,10 @@ class StandardPage extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: <Color>[Colors.black, Color.fromARGB(206, 0, 0, 0)]),
+                colors: <Color>[
+                  Colors.black,
+                  Color.fromARGB(255, 20, 20, 20),
+                ]),
           ),
         ),
         // backgroundColor: Color.fromARGB(255, 13, 13, 13),
@@ -52,15 +55,15 @@ class StandardPage extends StatelessWidget {
           )),
       bottomNavigationBar: BottomNavigationBar(
         mouseCursor: SystemMouseCursors.grab,
-        backgroundColor: Color.fromARGB(255, 77, 77, 77),
+        backgroundColor: Color.fromARGB(255, 53, 53, 53),
         iconSize: 30,
         selectedIconTheme: IconThemeData(color: Colors.white),
         selectedItemColor: Colors.white,
         selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
         unselectedIconTheme: IconThemeData(
-          color: Color.fromARGB(255, 48, 47, 47),
+          color: Color.fromARGB(255, 126, 126, 126),
         ),
-        unselectedItemColor: Color.fromARGB(255, 48, 47, 47),
+        unselectedItemColor: Color.fromARGB(255, 126, 126, 126),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.history),

@@ -1,9 +1,10 @@
+import 'package:challengescania_sprint2/src/app/components/standard_page.dart';
 import 'package:flutter/material.dart';
 
 ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
-  backgroundColor: const Color.fromARGB(0, 102, 102, 102),
-  primaryColor: Colors.grey, 
+  scaffoldBackgroundColor:Color.fromARGB(255, 20, 20, 20),
+  primaryColor: Colors.grey,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
       primary: Color.fromARGB(255, 20, 16, 72),
