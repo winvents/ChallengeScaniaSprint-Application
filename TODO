@@ -3,10 +3,5 @@ PROJETO: - Fonte - Tema
 COMPONENTES: - StandardForm - StandardCard
 
 PÁGINAS:
-LISTADECOTAÇÕES (home) - Botão de open (tamanho e cor), 
-
-COTAÇÃO
-
-NOVACOTAÇÃO
-
-VENDA
+    - NOVACOTAÇÃO
+    - VENDA

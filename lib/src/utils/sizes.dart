@@ -1,4 +1,4 @@
 class PaddingSizes {
-  static double introPageBorder = 35;
-  static double introPageTop = 35;
+  static double introPageBorder = 25;
+  static double introPageTop = 25;
 }

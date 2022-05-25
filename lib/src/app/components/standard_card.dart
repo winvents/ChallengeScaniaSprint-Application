@@ -1,4 +1,5 @@
 import 'package:challengescania_sprint2/src/app/components/standard_button.dart';
+import 'package:challengescania_sprint2/src/app/modules/quote/single_quote.dart';
 import 'package:flutter/material.dart';
 
 class StandardCard extends StatelessWidget {
@@ -22,6 +23,7 @@ class StandardCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         color: Color.fromARGB(255, 49, 49, 49),
+        borderRadius: BorderRadius.circular(10),
       ),
       height: 200,
       width: 350,
@@ -72,11 +74,17 @@ class StandardCard extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                
                 Align(
                   alignment: Alignment.bottomRight,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => SingleQuote()),
+                        ),
+                      );
+                    },
                     child: Icon(
                       Icons.open_in_new,
                       color: Colors.white,

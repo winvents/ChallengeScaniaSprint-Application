@@ -11,6 +11,17 @@ class HomePage extends StatelessWidget {
       title: title,
       body: Column(
         children: [
+          Text(
+            'LISTA DE COTAÇÕES',
+            style: TextStyle(
+              fontSize: 25,
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+           SizedBox(
+            height: 10,
+          ),
           StandardCard(
             id: '#168950',
             status: 'ativo',
