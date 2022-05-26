@@ -22,7 +22,6 @@ class StandardPage extends StatelessWidget {
                 ]),
           ),
         ),
-        // backgroundColor: Color.fromARGB(255, 13, 13, 13),
         title: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

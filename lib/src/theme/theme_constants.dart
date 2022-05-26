@@ -5,11 +5,11 @@ ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   scaffoldBackgroundColor:Color.fromARGB(255, 20, 20, 20),
   primaryColor: Colors.grey,
-  elevatedButtonTheme: ElevatedButtonThemeData(
-    style: ElevatedButton.styleFrom(
-      primary: Color.fromARGB(255, 20, 16, 72),
-    ),
-  ),
+  // elevatedButtonTheme: ElevatedButtonThemeData(
+  //   style: ElevatedButton.styleFrom(
+  //     primary: Color.fromARGB(255, 20, 16, 72),
+  //   ),
+  // ),
   textTheme: const TextTheme(
     bodyText2: TextStyle(color: Colors.white),
   ),

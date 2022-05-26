@@ -118,7 +118,7 @@ class StandardQuote extends StatelessWidget {
               ],
             ),
             SizedBox(
-              height:20,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -247,7 +247,7 @@ class StandardQuote extends StatelessWidget {
               height: 30,
             ),
             Text(
-              textAlign: TextAlign.center, 
+              textAlign: TextAlign.center,
               'VALOR DA PROPOSTA \n R\$:   $valor',
               style: TextStyle(
                 fontSize: 20,
@@ -262,6 +262,9 @@ class StandardQuote extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 20, 16, 72),
+                  ),
                   onPressed: () {},
                   child: Text('Gerar Venda'),
                 ),
