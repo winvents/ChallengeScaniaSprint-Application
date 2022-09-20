@@ -1,7 +1,5 @@
-import 'package:challengescania_sprint2/src/app/components/standard_appbar.dart';
 import 'package:challengescania_sprint2/src/app/components/standard_button.dart';
-import 'package:challengescania_sprint2/src/app/modules/homepage/home_page.dart';
-import 'package:challengescania_sprint2/src/app/modules/newquote/new_quote.dart';
+import 'package:challengescania_sprint2/src/app/modules/new_sale_page.dart';
 import 'package:challengescania_sprint2/src/utils/exports.dart';
 import 'package:flutter/material.dart';
 
@@ -10,7 +8,7 @@ class IntroPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-       flexibleSpace: Container(
+        flexibleSpace: Container(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
@@ -27,10 +25,10 @@ class IntroPage extends StatelessWidget {
               fit: BoxFit.cover,
               height: 40,
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
-            Text(
+            const Text(
               title,
               style: TextStyle(fontSize: 35),
             ),
@@ -52,18 +50,21 @@ class IntroPage extends StatelessWidget {
           ),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 45,
               ),
               const Text(
-                '${welcome} ${'User'}',
+                '$welcome user',
                 style: TextStyle(fontSize: 35),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
-              const Text(introText, textAlign: TextAlign.justify,),
-              SizedBox(
+              const Text(
+                introText,
+                textAlign: TextAlign.justify,
+              ),
+              const SizedBox(
                 height: 45,
               ),
               StandardButton(
@@ -72,18 +73,18 @@ class IntroPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: ((context) => NewQuote()),
+                      builder: ((context) => NewSale()),
                     ),
                   );
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 height: 250,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(promoted),
+                  const Text(promoted),
                   Image.asset(
                     'assets/images/logo branco.png',
                     fit: BoxFit.cover,
