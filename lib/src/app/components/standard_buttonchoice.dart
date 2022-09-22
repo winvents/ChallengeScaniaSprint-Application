@@ -16,11 +16,7 @@ class StandardButton extends StatelessWidget {
         onPressed: onPressed,
         child: Align(
           alignment: Alignment.center,
-          child: Column(
-            children: [
-              Text(buttonText),
-            ],
-          ),
+          child: Text(buttonText),
         ),
       ),
     );

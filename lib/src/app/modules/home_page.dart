@@ -1,27 +1,77 @@
-import 'package:challengescania_sprint2/src/app/components/standard_page.dart';
-import 'package:challengescania_sprint2/src/utils/exports.dart';
+import 'package:challengescania_sprint2/src/app/components/standard_appbar.dart';
+import 'package:challengescania_sprint2/src/app/modules/list_sales_page.dart';
+import 'package:challengescania_sprint2/src/app/modules/new_sale_page.dart';
+import 'package:challengescania_sprint2/src/app/modules/sales_dashboard.dart';
 import 'package:flutter/material.dart';
 
-//TO-DO Adicionar a renderização da lista de vendas geradas (método getAll)
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
-class HomePage extends StatelessWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int paginaAtual = 0;
+  late PageController pc;
+
+  @override
+  void initState() {
+    super.initState();
+    pc = PageController(initialPage: paginaAtual);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return StandardPage(
-      title: title,
-      body: Column(
-        children: const [
-          Text(
-            'LISTA DE VENDAS',
-            style: TextStyle(
-              fontSize: 25,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
+    return Scaffold(
+      body: PageView(
+        controller: pc,
+        onPageChanged: setPaginaAtual,
+        children: [
+          const SalesDashboardPage(),
+          NewSale(),
+          const SalesPage(),
         ],
       ),
+      bottomNavigationBar: BottomNavigationBar(
+          backgroundColor: Color.fromARGB(255, 53, 53, 53),
+          iconSize: 30,
+          selectedIconTheme: IconThemeData(color: Colors.white),
+          selectedItemColor: Colors.white,
+          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+          unselectedIconTheme: IconThemeData(
+            color: Color.fromARGB(255, 126, 126, 126),
+          ),
+          unselectedItemColor: Color.fromARGB(255, 126, 126, 126),
+          currentIndex: paginaAtual,
+          type: BottomNavigationBarType.fixed,
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.dashboard),
+              label: 'Dashboard',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.add),
+              label: 'Nova Venda',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'Histórico',
+            ),
+          ],
+          onTap: (pagina) {
+            pc.animateToPage(
+              pagina,
+              duration: const Duration(milliseconds: 400),
+              curve: Curves.ease,
+            );
+          }),
     );
-    ;
+  }
+
+  setPaginaAtual(pagina) {
+    setState(() {
+      paginaAtual = pagina;
+    });
   }
 }

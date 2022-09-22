@@ -32,6 +32,7 @@ class DatabaseManager {
       telefone INTEGER   
     );
   ''';
+
   String get _caminhao => '''
     CREATE TABLE IF NOT EXISTS caminhao (
       id_caminhao INTEGER PRIMARY KEY AUTOINCREMENT

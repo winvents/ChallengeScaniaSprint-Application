@@ -1,4 +1,5 @@
 import 'package:challengescania_sprint2/src/app/components/standard_button.dart';
+import 'package:challengescania_sprint2/src/app/modules/home_page.dart';
 import 'package:challengescania_sprint2/src/app/modules/new_sale_page.dart';
 import 'package:challengescania_sprint2/src/utils/exports.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,7 @@ class IntroPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: ((context) => NewSale()),
+                      builder: ((context) => const HomePage()),
                     ),
                   );
                 },
