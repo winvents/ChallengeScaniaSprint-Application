@@ -1,4 +1,3 @@
-import 'package:challengescania_sprint2/src/app/components/standard_appbar.dart';
 import 'package:challengescania_sprint2/src/app/modules/list_sales_page.dart';
 import 'package:challengescania_sprint2/src/app/modules/new_sale_page.dart';
 import 'package:challengescania_sprint2/src/app/modules/sales_dashboard.dart';
@@ -34,15 +33,15 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
-          backgroundColor: Color.fromARGB(255, 53, 53, 53),
+          backgroundColor: const Color.fromARGB(255, 53, 53, 53),
           iconSize: 30,
-          selectedIconTheme: IconThemeData(color: Colors.white),
+          selectedIconTheme: const IconThemeData(color: Colors.white),
           selectedItemColor: Colors.white,
-          selectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
-          unselectedIconTheme: IconThemeData(
+          selectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
+          unselectedIconTheme: const IconThemeData(
             color: Color.fromARGB(255, 126, 126, 126),
           ),
-          unselectedItemColor: Color.fromARGB(255, 126, 126, 126),
+          unselectedItemColor: const Color.fromARGB(255, 126, 126, 126),
           currentIndex: paginaAtual,
           type: BottomNavigationBarType.fixed,
           items: const [

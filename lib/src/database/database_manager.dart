@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 
 class DatabaseManager {
   Future<Database> getDatabase() async {
-    final path = join(await getDatabasesPath(), 'financas.db');
+    final path = join(await getDatabasesPath(), 'vendas.db');
     return openDatabase(path, version: 1, onCreate: _onCreate);
   }
 
@@ -17,15 +17,16 @@ class DatabaseManager {
     CREATE TABLE IF NOT EXISTS venda (
       id_venda INTEGER PRIMARY KEY AUTOINCREMENT,
       valor DOUBLE,
-      FOREIGN KEY(id_cliente) REFERENCES cliente(id_cliente),
-      FOREIGN KEY(id_caminhao) REFERENCES caminhao(id_caminhao),
+      id_cliente INTEGER,
+      id_caminhao INTEGER,
+      FOREIGN KEY(id_cliente) REFERENCES cliente(id),
+      FOREIGN KEY(id_caminhao) REFERENCES caminhao(id)
     );
   ''';
 
   String get _cliente => '''
     CREATE TABLE IF NOT EXISTS cliente (
-      id_cliente INTEGER PRIMARY KEY AUTOINCREMENT,
-      data INTEGER,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       nome TEXT,
       documento TEXT,
       email TEXT,
@@ -35,14 +36,13 @@ class DatabaseManager {
 
   String get _caminhao => '''
     CREATE TABLE IF NOT EXISTS caminhao (
-      id_caminhao INTEGER PRIMARY KEY AUTOINCREMENT
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       serie TEXT,
       operacao TEXT,
       aplicacao TEXT,
       eixo TEXT,
       chassi TEXT,
       pesoMax DOUBLE,
-      altura DOUBLE,
       mediaKm DOUBLE
     );
   ''';

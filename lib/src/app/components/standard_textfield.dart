@@ -5,13 +5,14 @@ class StandardTextField extends StatelessWidget {
   final Function()? onEditingComplete;
   final TextEditingController? userInputController;
   final FocusNode? focusNode;
+  final String? Function(String?)? validator;
 
-  StandardTextField({
-    required this.label,
-    this.userInputController,
-    this.onEditingComplete,
-    this.focusNode,
-  });
+  StandardTextField(
+      {required this.label,
+      required this.userInputController,
+      this.onEditingComplete,
+      this.focusNode,
+      required this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -23,6 +24,8 @@ class StandardTextField extends StatelessWidget {
         label: Text(label),
         border: OutlineInputBorder(),
       ),
+      style: TextStyle(color: Colors.white),
+      validator: validator,
     );
   }
 }

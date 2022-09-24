@@ -6,7 +6,6 @@ class Truck {
   final String? chassi;
   final String? serie;
   final double? pesoMax;
-  final double? altura;
   final double? mediaKm;
 
   Truck(
@@ -17,6 +16,5 @@ class Truck {
       this.chassi,
       this.serie,
       this.pesoMax,
-      this.altura,
       this.mediaKm});
 }
