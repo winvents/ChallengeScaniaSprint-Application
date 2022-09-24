@@ -21,11 +21,24 @@ class StandardSaleItem extends StatelessWidget {
           onTap: () {
             Navigator.pushNamed(context, '/sale-details', arguments: sale);
           },
-          child: StandardSaleCard(
-            id_venda: sale.id_venda!,
-            id_cliente: sale.id_cliente!,
-            id_caminhao: sale.id_caminhao!,
-            valor: sale.valor!,
+          child: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.green.withOpacity(0.8),
+                  Colors.green.withOpacity(0.2),
+                ],
+                begin: AlignmentDirectional.topStart,
+                end: AlignmentDirectional.bottomEnd,
+              ),
+              borderRadius: BorderRadius.circular(15),
+            ),
+            child: StandardSaleCard(
+              id_venda: sale.id_venda!,
+              id_cliente: sale.id_cliente!,
+              id_caminhao: sale.id_caminhao!,
+              valor: sale.valor!,
+            ),
           ),
         ),
       ),

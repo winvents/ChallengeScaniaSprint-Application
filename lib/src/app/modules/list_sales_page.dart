@@ -51,6 +51,18 @@ class _SalesPage extends State<SalesPage> {
           return Container();
         },
       ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () async {
+            bool? vendaCadastrada =
+                await Navigator.of(context).pushNamed('/new-sale') as bool?;
+
+            if (vendaCadastrada != null && vendaCadastrada) {
+              setState(() {
+                carregarVendas();
+              });
+            }
+          },
+          child: const Icon(Icons.add)),
     );
   }
 }

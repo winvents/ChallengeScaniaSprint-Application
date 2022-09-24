@@ -28,7 +28,7 @@ class _HomePageState extends State<HomePage> {
         onPageChanged: setPaginaAtual,
         children: [
           const SalesDashboardPage(),
-          NewSale(),
+          // NewSale(),
           const SalesPage(),
         ],
       ),
@@ -49,10 +49,10 @@ class _HomePageState extends State<HomePage> {
               icon: Icon(Icons.dashboard),
               label: 'Dashboard',
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.add),
-              label: 'Nova Venda',
-            ),
+            // BottomNavigationBarItem(
+            //   icon: Icon(Icons.add),
+            //   label: 'Nova Venda',
+            // ),
             BottomNavigationBarItem(
               icon: Icon(Icons.history),
               label: 'Histórico',
