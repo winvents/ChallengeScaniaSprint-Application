@@ -1,34 +1,36 @@
+import 'package:challengescania_sprint2/src/app/model/types/tipo_aplicacao.dart';
+import 'package:challengescania_sprint2/src/app/model/types/tipo_cabine.dart';
+import 'package:challengescania_sprint2/src/app/model/types/tipo_chassi.dart';
+import 'package:challengescania_sprint2/src/app/model/types/tipo_eixo.dart';
+import 'package:challengescania_sprint2/src/app/model/types/tipo_operacao.dart';
+
 class Sale {
   final int? id;
-  final double? valor;
-  final int? id_cliente;
-  final int? id_caminhao;
-  final String? nome;
-  final String? documento;
-  final String? email;
-  final String? telefone;
-  final String? operacao;
-  final String? aplicacao;
-  final String? eixo;
-  final String? chassi;
-  final String? serie;
-  final double? pesoMax;
-  final double? mediaKm;
+  final double valor;
+  final String nome;
+  final String documento;
+  final String email;
+  final String telefone;
+  final Cabine serie;
+  final Operacao operacao;
+  final Aplicacao aplicacao;
+  final Eixo eixo;
+  final Chassi chassi;
+  final double pesoMax;
+  final double mediaKm;
 
   Sale(
       {this.id,
-      this.valor,
-      this.id_cliente,
-      this.id_caminhao,
-      this.nome,
-      this.documento,
-      this.email,
-      this.telefone,
-      this.operacao,
-      this.aplicacao,
-      this.eixo,
-      this.chassi,
-      this.serie,
-      this.pesoMax,
-      this.mediaKm});
+      required this.valor,
+      required this.nome,
+      required this.documento,
+      required this.email,
+      required this.telefone,
+      required this.serie,
+      required this.operacao,
+      required this.aplicacao,
+      required this.eixo,
+      required this.chassi,
+      required this.pesoMax,
+      required this.mediaKm});
 }

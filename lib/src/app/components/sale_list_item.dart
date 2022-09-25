@@ -35,9 +35,7 @@ class StandardSaleItem extends StatelessWidget {
             ),
             child: StandardSaleCard(
               idVenda: sale.id!,
-              idCliente: sale.id_cliente!,
-              idCaminhao: sale.id_caminhao!,
-              valor: sale.valor!,
+              valor: sale.valor,
             ),
           ),
         ),

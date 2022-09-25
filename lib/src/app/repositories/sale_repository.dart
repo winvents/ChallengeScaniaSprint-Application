@@ -1,16 +1,30 @@
+import 'package:challengescania_sprint2/src/app/model/types/tipo_cabine.dart';
+import 'package:challengescania_sprint2/src/app/model/types/tipo_chassi.dart';
+import 'package:challengescania_sprint2/src/app/model/types/tipo_eixo.dart';
 import 'package:challengescania_sprint2/src/database/database_manager.dart';
 
 import '../model/sale.dart';
+import '../model/types/tipo_aplicacao.dart';
+import '../model/types/tipo_operacao.dart';
 
 class SaleRepository {
   Future<void> gerarVenda(Sale sale) async {
     final db = await DatabaseManager().getDatabase();
 
     db.insert("venda", {
-      "id_venda": sale.id,
+      "id": sale.id,
       "valor": sale.valor,
-      "id_cliente": sale.id_cliente,
-      "id_caminhao": sale.id_caminhao
+      "nome": sale.nome,
+      "documento": sale.documento,
+      "email": sale.email,
+      "telefone": sale.telefone,
+      "serie": sale.serie.index,
+      "operacao": sale.operacao.index,
+      "aplicacao": sale.aplicacao.index,
+      "eixo": sale.eixo.index,
+      "chassi": sale.chassi.index,
+      "pesoMax": sale.pesoMax,
+      "mediaKm": sale.mediaKm
     });
   }
 
@@ -19,42 +33,36 @@ class SaleRepository {
 
     final List<Map<String, dynamic>> rows = await db.rawQuery('''
       SELECT
-      venda.id_venda,
+      venda.id,
       venda.valor,
-      venda.id_cliente,
-      venda.id_caminhao,
-      cliente.nome,
-      cliente.documento,
-      cliente.email,
-      cliente.telefone,
-      caminhao.serie,
-      caminhao.operacao,
-      caminhao.aplicacao,
-      caminhao.eixo, 
-      caminhao.chassi,
-      caminhao.pesoMax,
-      caminhao.mediaKm
+      venda.nome,
+      venda.documento,
+      venda.email,
+      venda.telefone,
+      venda.serie,
+      venda.operacao,
+      venda.aplicacao,
+      venda.eixo, 
+      venda.chassi,
+      venda.pesoMax,
+      venda.mediaKm
       FROM venda
-    INNER JOIN cliente ON cliente.id = venda.id_cliente
-    INNER JOIN caminhao ON caminhao.id = venda.id_caminhao
 ''');
 
     return rows
         .map(
           (row) => Sale(
-            id: row['id_venda'],
+            id: row['id'],
             valor: row['valor'],
-            id_cliente: row['id_cliente'],
-            id_caminhao: row['id_caminhao'],
             nome: row['nome'],
             documento: row['documento'],
             email: row['email'],
             telefone: row['telefone'],
-            serie: row['serie'],
-            operacao: row['operacao'],
-            aplicacao: row['aplicacao'],
-            eixo: row['eixo'],
-            chassi: row['chassi'],
+            serie: Cabine.values[row['serie']],
+            operacao: Operacao.values[row['operacao']],
+            aplicacao: Aplicacao.values[row['aplicacao']],
+            eixo: Eixo.values[row['eixo']],
+            chassi: Chassi.values[row['chassi']],
             pesoMax: row['pesoMax'],
             mediaKm: row['mediaKm'],
           ),

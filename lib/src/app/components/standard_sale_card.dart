@@ -4,14 +4,10 @@ import 'package:intl/intl.dart';
 class StandardSaleCard extends StatelessWidget {
   int idVenda;
   double valor;
-  int idCliente;
-  int idCaminhao;
 
   StandardSaleCard({
     super.key,
     required this.idVenda,
-    required this.idCliente,
-    required this.idCaminhao,
     required this.valor,
   });
 
@@ -43,15 +39,8 @@ class StandardSaleCard extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                'Id caminhão: $idCaminhao',
-              ),
             ],
           ),
-          const SizedBox(
-            height: 15,
-          ),
-          Text('Id caminhão: $idCliente'),
           const SizedBox(
             height: 15,
           ),

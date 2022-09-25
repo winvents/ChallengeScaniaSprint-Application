@@ -24,8 +24,8 @@ class NewSale extends StatefulWidget {
 }
 
 class _NewSaleState extends State<NewSale> {
-  final _clientRepository = ClientRepository();
-  final _truckRepository = TruckRepository();
+  // final _clientRepository = ClientRepository();
+  // final _truckRepository = TruckRepository();
   final _saleRepository = SaleRepository();
 
   final _clienteNameCrontoller = TextEditingController();
@@ -502,11 +502,11 @@ class _NewSaleState extends State<NewSale> {
             final clienteEmail = _clienteEmailCrontoller.text;
             final clienteTelefone = _clienteNumberCrontoller.text;
 
-            var operacao = _operacaoSelecionada.name;
-            var aplicacao = _aplicacaoSelecionada.name;
-            var eixo = _eixoSelecionado.name;
-            var chassi = _chassiSelecionado.name;
-            var cabine = _cabineSelecionada.name;
+            var cabine = _cabineSelecionada;
+            var operacao = _operacaoSelecionada;
+            var aplicacao = _aplicacaoSelecionada;
+            var eixo = _eixoSelecionado;
+            var chassi = _chassiSelecionado;
 
             final pesoMax = double.parse(_pesoMaxController.text);
 
@@ -516,27 +516,38 @@ class _NewSaleState extends State<NewSale> {
                 .parse(_valorController.text.replaceAll('R\$', ''))
                 .toDouble();
 
-            final cliente = Cliente(
+            // final cliente = Cliente(
+            //     nome: clienteNome,
+            //     documento: clienteDocumento,
+            //     email: clienteEmail,
+            //     telefone: clienteTelefone);
+
+            // final caminhao = Truck(
+            //     operacao: operacao,
+            //     aplicacao: aplicacao,
+            //     eixo: eixo,
+            //     chassi: chassi,
+            //     serie: cabine,
+            //     pesoMax: pesoMax,
+            //     mediaKm: mediaKm);
+
+            final venda = Sale(
+                valor: valor,
                 nome: clienteNome,
                 documento: clienteDocumento,
                 email: clienteEmail,
-                telefone: clienteTelefone);
-
-            final caminhao = Truck(
+                telefone: clienteTelefone,
+                serie: cabine,
                 operacao: operacao,
                 aplicacao: aplicacao,
                 eixo: eixo,
                 chassi: chassi,
-                serie: cabine,
                 pesoMax: pesoMax,
                 mediaKm: mediaKm);
 
-            final venda = Sale(
-                valor: valor, id_cliente: cliente.id, id_caminhao: caminhao.id);
-
             try {
-              await _clientRepository.cadastrarCliente(cliente);
-              await _truckRepository.cadastrarCaminhao(caminhao);
+              // await _clientRepository.cadastrarCliente(cliente);
+              // await _truckRepository.cadastrarCaminhao(caminhao);
               await _saleRepository.gerarVenda(venda);
 
               ScaffoldMessenger.of(context).showSnackBar(
