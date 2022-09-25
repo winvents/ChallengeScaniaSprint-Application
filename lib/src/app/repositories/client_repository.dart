@@ -7,7 +7,7 @@ class ClientRepository {
     final db = await DatabaseManager().getDatabase();
 
     db.insert("cliente", {
-      "id": client.id_cliente,
+      "id": client.id,
       "nome": client.nome,
       "documento": client.documento,
       "email": client.email,

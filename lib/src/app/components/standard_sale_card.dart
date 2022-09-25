@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StandardSaleCard extends StatelessWidget {
-  int id_venda;
+  int idVenda;
   double valor;
-  int id_cliente;
-  int id_caminhao;
+  int idCliente;
+  int idCaminhao;
 
   StandardSaleCard({
     super.key,
-    required this.id_venda,
-    required this.id_cliente,
-    required this.id_caminhao,
+    required this.idVenda,
+    required this.idCliente,
+    required this.idCaminhao,
     required this.valor,
   });
 
@@ -26,7 +26,7 @@ class StandardSaleCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(id_venda.toString(),
+          Text(idVenda.toString(),
               style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w500,
@@ -44,14 +44,14 @@ class StandardSaleCard extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                'Id caminhão: $id_caminhao',
+                'Id caminhão: $idCaminhao',
               ),
             ],
           ),
           const SizedBox(
             height: 15,
           ),
-          Text('Id caminhão: $id_cliente'),
+          Text('Id caminhão: $idCliente'),
           const SizedBox(
             height: 15,
           ),

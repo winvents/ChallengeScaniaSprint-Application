@@ -7,7 +7,7 @@ class SaleRepository {
     final db = await DatabaseManager().getDatabase();
 
     db.insert("venda", {
-      "id_venda": sale.id_venda,
+      "id_venda": sale.id,
       "valor": sale.valor,
       "id_cliente": sale.id_cliente,
       "id_caminhao": sale.id_caminhao
@@ -42,7 +42,7 @@ class SaleRepository {
     return rows
         .map(
           (row) => Sale(
-            id_venda: row['id_venda'],
+            id: row['id_venda'],
             valor: row['valor'],
             id_cliente: row['id_cliente'],
             id_caminhao: row['id_caminhao'],

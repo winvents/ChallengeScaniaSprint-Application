@@ -37,15 +37,12 @@ class _SalesPage extends State<SalesPage> {
           }
           if (snapshot.connectionState == ConnectionState.done) {
             final vendas = snapshot.data ?? [];
-            return ListView.separated(
+            return ListView.builder(
               itemCount: vendas.length,
-              itemBuilder: ((context, index) {
+              itemBuilder: (context, index) {
                 final venda = vendas[index];
-                return StandardSaleItem(
-                  sale: venda,
-                );
-              }),
-              separatorBuilder: (context, index) => const Divider(),
+                return StandardSaleItem(sale: venda);
+              },
             );
           }
           return Container();

@@ -1,5 +1,5 @@
 class Truck {
-  final int? id_caminhao;
+  final int? id;
   final String? operacao;
   final String? aplicacao;
   final String? eixo;
@@ -9,7 +9,7 @@ class Truck {
   final double? mediaKm;
 
   Truck(
-      {this.id_caminhao,
+      {this.id,
       this.operacao,
       this.aplicacao,
       this.eixo,

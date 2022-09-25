@@ -34,9 +34,9 @@ class StandardSaleItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             child: StandardSaleCard(
-              id_venda: sale.id_venda!,
-              id_cliente: sale.id_cliente!,
-              id_caminhao: sale.id_caminhao!,
+              idVenda: sale.id!,
+              idCliente: sale.id_cliente!,
+              idCaminhao: sale.id_caminhao!,
               valor: sale.valor!,
             ),
           ),

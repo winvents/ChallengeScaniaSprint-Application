@@ -532,9 +532,7 @@ class _NewSaleState extends State<NewSale> {
                 mediaKm: mediaKm);
 
             final venda = Sale(
-                valor: valor,
-                id_cliente: cliente.id_cliente,
-                id_caminhao: caminhao.id_caminhao);
+                valor: valor, id_cliente: cliente.id, id_caminhao: caminhao.id);
 
             try {
               await _clientRepository.cadastrarCliente(cliente);

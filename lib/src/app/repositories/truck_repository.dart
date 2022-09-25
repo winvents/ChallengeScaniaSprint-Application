@@ -6,7 +6,7 @@ class TruckRepository {
     final db = await DatabaseManager().getDatabase();
 
     db.insert("caminhao", {
-      "id": truck.id_caminhao,
+      "id": truck.id,
       "serie": truck.serie,
       "operacao": truck.operacao,
       "aplicacao": truck.aplicacao,
