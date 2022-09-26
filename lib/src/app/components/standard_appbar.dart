@@ -14,14 +14,14 @@ class StandardAppBar extends StatelessWidget {
             fit: BoxFit.cover,
             height: 40,
           ),
-          SizedBox(
+          const SizedBox(
             width: 5,
           ),
-          Text(
+          const Text(
             title,
             style: TextStyle(fontSize: 35),
           ),
-          SizedBox(
+          const SizedBox(
             width: 40,
           ),
         ],

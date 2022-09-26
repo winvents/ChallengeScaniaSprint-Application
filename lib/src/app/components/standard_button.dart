@@ -13,7 +13,7 @@ class StandardButton extends StatelessWidget {
       width: double.infinity,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Color.fromARGB(255, 20, 16, 72),
+          backgroundColor: Color.fromARGB(255, 20, 16, 72),
         ),
         onPressed: onPressed,
         child: Align(
