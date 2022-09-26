@@ -5,7 +5,7 @@ import 'package:challengescania_sprint2/src/app/model/types/tipo_eixo.dart';
 import 'package:challengescania_sprint2/src/app/model/types/tipo_operacao.dart';
 
 class Sale {
-  final int? id;
+  late final int? id;
   final double valor;
   final String nome;
   final String documento;

@@ -8,8 +8,6 @@ class DatabaseManager {
   }
 
   _onCreate(Database db, int version) async {
-    // await db.execute(_caminhao);
-    // await db.execute(_cliente);
     await db.execute(_venda);
   }
 

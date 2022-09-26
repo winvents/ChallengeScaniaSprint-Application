@@ -1,14 +1,10 @@
 import 'package:challengescania_sprint2/src/app/components/standard_button.dart';
-import 'package:challengescania_sprint2/src/app/model/client.dart';
-import 'package:challengescania_sprint2/src/app/model/truck.dart';
 import 'package:challengescania_sprint2/src/app/model/types/tipo_aplicacao.dart';
 import 'package:challengescania_sprint2/src/app/model/types/tipo_cabine.dart';
 import 'package:challengescania_sprint2/src/app/model/types/tipo_chassi.dart';
 import 'package:challengescania_sprint2/src/app/model/types/tipo_eixo.dart';
 import 'package:challengescania_sprint2/src/app/model/types/tipo_operacao.dart';
-import 'package:challengescania_sprint2/src/app/repositories/client_repository.dart';
 import 'package:challengescania_sprint2/src/app/repositories/sale_repository.dart';
-import 'package:challengescania_sprint2/src/app/repositories/truck_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:intl/intl.dart';
@@ -17,15 +13,14 @@ import '../components/standard_textfield.dart';
 import '../model/sale.dart';
 
 class NewSale extends StatefulWidget {
-  NewSale({Key? key}) : super(key: key);
+  Sale? vendaEditavel;
+  NewSale({Key? key, this.vendaEditavel}) : super(key: key);
 
   @override
   State<NewSale> createState() => _NewSaleState();
 }
 
 class _NewSaleState extends State<NewSale> {
-  // final _clientRepository = ClientRepository();
-  // final _truckRepository = TruckRepository();
   final _saleRepository = SaleRepository();
 
   final _clienteNameCrontoller = TextEditingController();
@@ -55,6 +50,72 @@ class _NewSaleState extends State<NewSale> {
   @override
   void initState() {
     super.initState();
+
+    final venda = widget.vendaEditavel;
+    if (venda != null) {
+      _clienteNameCrontoller.text = venda.nome;
+      _clienteDocumentCrontoller.text = venda.documento;
+      _clienteEmailCrontoller.text = venda.email;
+      _clienteNumberCrontoller.text = venda.telefone;
+      _pesoMaxController.text =
+          NumberFormat.decimalPattern().format(venda.pesoMax);
+      _mediaKmController.text =
+          NumberFormat.decimalPattern().format(venda.mediaKm);
+      _valorController.text =
+          NumberFormat.simpleCurrency(locale: 'pt_BR').format(venda.valor);
+    }
+
+    carregarTipoSerie();
+    carregarTipoOperacao();
+    carregarTipoAplicacao();
+    carregarTipoChassi();
+    carregarTipoEixo();
+  }
+
+  Future<void> carregarTipoSerie() async {
+    final tiposDeSerie = await _saleRepository.listarTiposDeSerie();
+
+    setState(() {
+      _cabines =
+          tiposDeSerie.where((tipos) => tipos == _cabineSelecionada).toList();
+    });
+  }
+
+  Future<void> carregarTipoOperacao() async {
+    final tiposDeOperacao = await _saleRepository.listarTiposDeOperacao();
+
+    setState(() {
+      _operacoes = tiposDeOperacao
+          .where((tipos) => tipos == _operacaoSelecionada)
+          .toList();
+    });
+  }
+
+  Future<void> carregarTipoAplicacao() async {
+    final tiposDeAplicacao = await _saleRepository.listarTiposDeAplicacao();
+
+    setState(() {
+      _aplicacoes = tiposDeAplicacao
+          .where((tipos) => tipos == _aplicacaoSelecionada)
+          .toList();
+    });
+  }
+
+  Future<void> carregarTipoChassi() async {
+    final tiposDeChassi = await _saleRepository.listarTiposDeChassi();
+
+    setState(() {
+      _chassis =
+          tiposDeChassi.where((tipos) => tipos == _chassiSelecionado).toList();
+    });
+  }
+
+  Future<void> carregarTipoEixo() async {
+    final tiposDeEixo = await _saleRepository.listarTiposDeEixo();
+
+    setState(() {
+      _eixos = tiposDeEixo.where((tipos) => tipos == _eixoSelecionado).toList();
+    });
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -126,7 +187,15 @@ class _NewSaleState extends State<NewSale> {
   Container _buildClientCard() {
     return Container(
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 49, 49, 49),
+        // color: Color.fromARGB(255, 44, 44, 44),
+        gradient: LinearGradient(
+          colors: [
+            const Color.fromARGB(255, 36, 36, 36).withOpacity(0.2),
+            const Color.fromARGB(255, 36, 36, 36).withOpacity(0.8),
+          ],
+          begin: AlignmentDirectional.centerStart,
+          end: AlignmentDirectional.centerEnd,
+        ),
         borderRadius: BorderRadius.circular(10),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -134,7 +203,7 @@ class _NewSaleState extends State<NewSale> {
       height: 180,
       child: Column(
         children: [
-          Text(
+          const Text(
             'DADOS DO CLIENTE',
             style: TextStyle(
               fontSize: 20,
@@ -142,129 +211,69 @@ class _NewSaleState extends State<NewSale> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image(
-                image: AssetImage('assets/images/caminhao.png'),
+              StandardTextField(
+                keyboardType: TextInputType.text,
+                height: 30,
+                label: 'Nome do Cliente',
+                userInputController: _clienteNameCrontoller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe um Nome';
+                  }
+                  if (value.length < 5 || value.length > 30) {
+                    return 'O nome deve ter entre 5 e 30 caracteres';
+                  }
+                  return null;
+                },
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Container(
-                    height: 25,
-                    width: 160,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Color.fromARGB(100, 20, 20, 20),
-                            Color.fromARGB(200, 20, 20, 20),
-                          ]),
-                    ),
-                    child: StandardTextField(
-                      label: 'Nome do Cliente',
-                      userInputController: _clienteNameCrontoller,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Informe um Nome';
-                        }
-                        if (value.length < 5 || value.length > 30) {
-                          return 'O nome deve ter entre 5 e 30 caracteres';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: 25,
-                    width: 160,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Color.fromARGB(100, 20, 20, 20),
-                            Color.fromARGB(200, 20, 20, 20),
-                          ]),
-                    ),
-                    child: StandardTextField(
-                      label: 'CPF / CNPJ',
-                      userInputController: _clienteDocumentCrontoller,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Informe um número de documento';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: 25,
-                    width: 160,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Color.fromARGB(100, 20, 20, 20),
-                            Color.fromARGB(200, 20, 20, 20),
-                          ]),
-                    ),
-                    child: StandardTextField(
-                      label: 'E-mail',
-                      userInputController: _clienteEmailCrontoller,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Informe um endereço de e-mail';
-                        }
-                        if (value.length < 11 || value.length > 30) {
-                          return 'O email deve ter entre 11 e 30 caracteres';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: 25,
-                    width: 160,
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
-                    decoration: const BoxDecoration(
-                      gradient: LinearGradient(
-                          begin: Alignment.topCenter,
-                          end: Alignment.bottomCenter,
-                          colors: <Color>[
-                            Color.fromARGB(100, 20, 20, 20),
-                            Color.fromARGB(200, 20, 20, 20),
-                          ]),
-                    ),
-                    child: StandardTextField(
-                      label: 'Telefone',
-                      userInputController: _clienteNumberCrontoller,
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Informe um número de telefone';
-                        }
-                        if (value.length < 11 || value.length > 30) {
-                          return 'O número deve ter entre 11 e 30 caracteres';
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                ],
+              StandardTextField(
+                keyboardType: TextInputType.text,
+                height: 30,
+                label: 'CPF / CNPJ',
+                userInputController: _clienteDocumentCrontoller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe um número de documento';
+                  }
+                  return null;
+                },
+              ),
+              StandardTextField(
+                keyboardType: TextInputType.text,
+                height: 30,
+                label: 'E-mail',
+                userInputController: _clienteEmailCrontoller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe um endereço de e-mail';
+                  }
+                  if (value.length < 11 || value.length > 30) {
+                    return 'O email deve ter entre 11 e 30 caracteres';
+                  }
+                  return null;
+                },
+              ),
+              StandardTextField(
+                keyboardType: TextInputType.number,
+                height: 30,
+                label: 'Telefone',
+                userInputController: _clienteNumberCrontoller,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Informe um número de telefone';
+                  }
+                  if (value.length < 11 || value.length > 30) {
+                    return 'O número deve ter entre 11 e 30 caracteres';
+                  }
+                  return null;
+                },
               ),
             ],
           ),
@@ -442,6 +451,7 @@ class _NewSaleState extends State<NewSale> {
 
   StandardTextField _buildPesoMaxField() {
     return StandardTextField(
+      keyboardType: TextInputType.number,
       label: 'Peso Máximo',
       userInputController: _pesoMaxController,
       validator: (value) {
@@ -458,6 +468,7 @@ class _NewSaleState extends State<NewSale> {
 
   StandardTextField _buildMediaKmField() {
     return StandardTextField(
+      keyboardType: TextInputType.number,
       label: 'Média de KM Anual',
       userInputController: _mediaKmController,
       validator: (value) {
@@ -474,6 +485,7 @@ class _NewSaleState extends State<NewSale> {
 
   StandardTextField _buildValor() {
     return StandardTextField(
+      keyboardType: TextInputType.number,
       userInputController: _valorController,
       validator: (value) {
         if (value == null || value.isEmpty) {
@@ -508,28 +520,17 @@ class _NewSaleState extends State<NewSale> {
             var eixo = _eixoSelecionado;
             var chassi = _chassiSelecionado;
 
-            final pesoMax = double.parse(_pesoMaxController.text);
+            final pesoMax = NumberFormat.decimalPattern()
+                .parse(_pesoMaxController.text)
+                .toDouble();
 
-            final mediaKm = double.parse(_mediaKmController.text);
+            final mediaKm = NumberFormat.decimalPattern()
+                .parse(_mediaKmController.text)
+                .toDouble();
 
             final valor = NumberFormat.currency(locale: 'pt_BR')
                 .parse(_valorController.text.replaceAll('R\$', ''))
                 .toDouble();
-
-            // final cliente = Cliente(
-            //     nome: clienteNome,
-            //     documento: clienteDocumento,
-            //     email: clienteEmail,
-            //     telefone: clienteTelefone);
-
-            // final caminhao = Truck(
-            //     operacao: operacao,
-            //     aplicacao: aplicacao,
-            //     eixo: eixo,
-            //     chassi: chassi,
-            //     serie: cabine,
-            //     pesoMax: pesoMax,
-            //     mediaKm: mediaKm);
 
             final venda = Sale(
                 valor: valor,
@@ -546,9 +547,12 @@ class _NewSaleState extends State<NewSale> {
                 mediaKm: mediaKm);
 
             try {
-              // await _clientRepository.cadastrarCliente(cliente);
-              // await _truckRepository.cadastrarCaminhao(caminhao);
-              await _saleRepository.gerarVenda(venda);
+              if (widget.vendaEditavel != null) {
+                venda.id = widget.vendaEditavel!.id;
+                await _saleRepository.editarVenda(venda);
+              } else {
+                await _saleRepository.gerarVenda(venda);
+              }
 
               ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(content: Text('Venda gerada com Sucesso!')));

@@ -6,26 +6,33 @@ class StandardTextField extends StatelessWidget {
   final TextEditingController? userInputController;
   final FocusNode? focusNode;
   final String? Function(String?)? validator;
+  final double? height;
 
   StandardTextField(
       {required this.label,
       required this.userInputController,
       this.onEditingComplete,
       this.focusNode,
-      required this.validator});
+      required this.validator,
+      this.height,
+      required TextInputType keyboardType});
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
-      focusNode: focusNode,
-      controller: userInputController,
-      onEditingComplete: onEditingComplete,
-      decoration: InputDecoration(
-        label: Text(label),
-        border: OutlineInputBorder(),
+    return Container(
+      height: height,
+      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
+      child: TextFormField(
+        focusNode: focusNode,
+        controller: userInputController,
+        onEditingComplete: onEditingComplete,
+        decoration: InputDecoration(
+          label: Text(label),
+          border: const OutlineInputBorder(),
+        ),
+        style: const TextStyle(color: Colors.white),
+        validator: validator,
       ),
-      style: TextStyle(color: Colors.white),
-      validator: validator,
     );
   }
 }

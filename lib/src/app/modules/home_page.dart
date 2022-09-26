@@ -1,3 +1,4 @@
+import 'package:challengescania_sprint2/src/app/components/standard_appbar.dart';
 import 'package:challengescania_sprint2/src/app/modules/list_sales_page.dart';
 import 'package:challengescania_sprint2/src/app/modules/new_sale_page.dart';
 import 'package:challengescania_sprint2/src/app/modules/sales_dashboard.dart';

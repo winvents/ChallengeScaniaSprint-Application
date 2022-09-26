@@ -25,8 +25,8 @@ class StandardSaleItem extends StatelessWidget {
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Colors.green.withOpacity(0.8),
-                  Colors.green.withOpacity(0.2),
+                  Color.fromARGB(255, 47, 11, 209).withOpacity(0.1),
+                  const Color.fromARGB(255, 47, 11, 209).withOpacity(0.8),
                 ],
                 begin: AlignmentDirectional.topStart,
                 end: AlignmentDirectional.bottomEnd,
@@ -34,8 +34,11 @@ class StandardSaleItem extends StatelessWidget {
               borderRadius: BorderRadius.circular(15),
             ),
             child: StandardSaleCard(
-              idVenda: sale.id!,
               valor: sale.valor,
+              nome: sale.nome,
+              documento: sale.documento,
+              operacao: sale.operacao,
+              aplicacao: sale.aplicacao,
             ),
           ),
         ),
