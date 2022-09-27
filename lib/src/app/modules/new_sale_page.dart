@@ -227,8 +227,8 @@ class _NewSaleState extends State<NewSale> {
                   if (value == null || value.isEmpty) {
                     return 'Informe um Nome';
                   }
-                  if (value.length < 5 || value.length > 30) {
-                    return 'O nome deve ter entre 5 e 30 caracteres';
+                  if (value.length < 3 || value.length > 12) {
+                    return 'O nome deve ter entre 3 e 12 caracteres';
                   }
                   return null;
                 },
