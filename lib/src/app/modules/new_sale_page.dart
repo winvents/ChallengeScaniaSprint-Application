@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:intl/intl.dart';
 
+import '../components/standard_appbar.dart';
 import '../components/standard_textfield.dart';
 import '../model/sale.dart';
 
@@ -122,66 +123,67 @@ class _NewSaleState extends State<NewSale> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: StandardAppBar(),
         body: SingleChildScrollView(
-      child: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const Text(
-                'NOVA VENDA',
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  const Text(
+                    'NOVA VENDA',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  _buildClientCard(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoOperacao(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoAplicacao(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoEixo(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoChassi(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoSerie(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildPesoMaxField(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildMediaKmField(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildValor(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildSaveButton()
+                ],
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              _buildClientCard(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoOperacao(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoAplicacao(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoEixo(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoChassi(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoSerie(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildPesoMaxField(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildMediaKmField(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildValor(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildSaveButton()
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Container _buildClientCard() {

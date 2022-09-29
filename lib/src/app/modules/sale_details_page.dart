@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
+import '../components/standard_appbar.dart';
 import '../model/sale.dart';
 
 class SaleDetailsPage extends StatefulWidget {
@@ -21,6 +22,7 @@ class _SaleDetailsPage extends State<SaleDetailsPage> {
     final venda = ModalRoute.of(context)!.settings.arguments as Sale;
 
     return Scaffold(
+      appBar: StandardAppBar(),
       body: Padding(
         padding: const EdgeInsets.only(
           left: 15,
