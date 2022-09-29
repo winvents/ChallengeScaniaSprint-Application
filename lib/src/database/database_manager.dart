@@ -9,6 +9,20 @@ class DatabaseManager {
 
   _onCreate(Database db, int version) async {
     await db.execute(_venda);
+    await db.insert("venda", {
+      "valor": '150000',
+      "nome": 'Diego',
+      "documento": '12345678910',
+      "email": 'diego@email.com',
+      "telefone": '11123456789',
+      "serie": 0,
+      "operacao": 0,
+      "aplicacao": 0,
+      "eixo": 0,
+      "chassi": 0,
+      "pesoMax": '500',
+      "mediaKm": '15000'
+    });
   }
 
   String get _venda => '''

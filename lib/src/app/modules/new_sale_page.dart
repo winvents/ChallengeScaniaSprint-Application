@@ -507,63 +507,64 @@ class _NewSaleState extends State<NewSale> {
 
   StandardButton _buildSaveButton() {
     return StandardButton(
-        buttonText: 'GERAR VENDA',
-        onPressed: () async {
-          final isValid = _formKey.currentState!.validate();
-          if (isValid) {
-            final clienteNome = _clienteNameCrontoller.text;
-            final clienteDocumento = _clienteDocumentCrontoller.text;
-            final clienteEmail = _clienteEmailCrontoller.text;
-            final clienteTelefone = _clienteNumberCrontoller.text;
+      buttonText: 'GERAR VENDA',
+      onPressed: () async {
+        final isValid = _formKey.currentState!.validate();
+        if (isValid) {
+          final clienteNome = _clienteNameCrontoller.text;
+          final clienteDocumento = _clienteDocumentCrontoller.text;
+          final clienteEmail = _clienteEmailCrontoller.text;
+          final clienteTelefone = _clienteNumberCrontoller.text;
 
-            var cabine = _cabineSelecionada;
-            var operacao = _operacaoSelecionada;
-            var aplicacao = _aplicacaoSelecionada;
-            var eixo = _eixoSelecionado;
-            var chassi = _chassiSelecionado;
+          var cabine = _cabineSelecionada;
+          var operacao = _operacaoSelecionada;
+          var aplicacao = _aplicacaoSelecionada;
+          var eixo = _eixoSelecionado;
+          var chassi = _chassiSelecionado;
 
-            final pesoMax = NumberFormat.decimalPattern()
-                .parse(_pesoMaxController.text)
-                .toDouble();
+          final pesoMax = NumberFormat.decimalPattern()
+              .parse(_pesoMaxController.text)
+              .toDouble();
 
-            final mediaKm = NumberFormat.decimalPattern()
-                .parse(_mediaKmController.text)
-                .toDouble();
+          final mediaKm = NumberFormat.decimalPattern()
+              .parse(_mediaKmController.text)
+              .toDouble();
 
-            final valor = NumberFormat.currency(locale: 'pt_BR')
-                .parse(_valorController.text.replaceAll('R\$', ''))
-                .toDouble();
+          final valor = NumberFormat.currency(locale: 'pt_BR')
+              .parse(_valorController.text.replaceAll('R\$', ''))
+              .toDouble();
 
-            final venda = Sale(
-                valor: valor,
-                nome: clienteNome,
-                documento: clienteDocumento,
-                email: clienteEmail,
-                telefone: clienteTelefone,
-                serie: cabine,
-                operacao: operacao,
-                aplicacao: aplicacao,
-                eixo: eixo,
-                chassi: chassi,
-                pesoMax: pesoMax,
-                mediaKm: mediaKm);
+          final venda = Sale(
+              valor: valor,
+              nome: clienteNome,
+              documento: clienteDocumento,
+              email: clienteEmail,
+              telefone: clienteTelefone,
+              serie: cabine,
+              operacao: operacao,
+              aplicacao: aplicacao,
+              eixo: eixo,
+              chassi: chassi,
+              pesoMax: pesoMax,
+              mediaKm: mediaKm);
 
-            try {
-              if (widget.vendaEditavel != null) {
-                venda.id = widget.vendaEditavel!.id;
-                await _saleRepository.editarVenda(venda);
-              } else {
-                await _saleRepository.gerarVenda(venda);
-              }
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Venda gerada com Sucesso!')));
-
-              Navigator.of(context).pop(true);
-            } catch (e) {
-              Navigator.of(context).pop(false);
+          try {
+            if (widget.vendaEditavel != null) {
+              venda.id = widget.vendaEditavel!.id;
+              await _saleRepository.editarVenda(venda);
+            } else {
+              await _saleRepository.gerarVenda(venda);
             }
+
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Venda gerada com Sucesso!')));
+
+            Navigator.of(context).pop(true);
+          } catch (e) {
+            Navigator.of(context).pop(false);
           }
-        });
+        }
+      },
+    );
   }
 }
