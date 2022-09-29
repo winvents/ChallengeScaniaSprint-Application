@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text2/flutter_masked_text2.dart';
 import 'package:intl/intl.dart';
 
+import '../components/standard_appbar.dart';
 import '../components/standard_textfield.dart';
 import '../model/sale.dart';
 
@@ -122,66 +123,67 @@ class _NewSaleState extends State<NewSale> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: StandardAppBar(),
         body: SingleChildScrollView(
-      child: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            children: [
-              const Text(
-                'NOVA VENDA',
-                style: TextStyle(
-                  fontSize: 25,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
+          child: Form(
+            key: _formKey,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  const Text(
+                    'NOVA VENDA',
+                    style: TextStyle(
+                      fontSize: 25,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  _buildClientCard(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoOperacao(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoAplicacao(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoEixo(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoChassi(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildTipoSerie(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildPesoMaxField(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildMediaKmField(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildValor(),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  _buildSaveButton()
+                ],
               ),
-              const SizedBox(
-                height: 15,
-              ),
-              _buildClientCard(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoOperacao(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoAplicacao(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoEixo(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoChassi(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildTipoSerie(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildPesoMaxField(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildMediaKmField(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildValor(),
-              const SizedBox(
-                height: 20,
-              ),
-              _buildSaveButton()
-            ],
+            ),
           ),
-        ),
-      ),
-    ));
+        ));
   }
 
   Container _buildClientCard() {
@@ -227,8 +229,8 @@ class _NewSaleState extends State<NewSale> {
                   if (value == null || value.isEmpty) {
                     return 'Informe um Nome';
                   }
-                  if (value.length < 5 || value.length > 30) {
-                    return 'O nome deve ter entre 5 e 30 caracteres';
+                  if (value.length < 3 || value.length > 12) {
+                    return 'O nome deve ter entre 3 e 12 caracteres';
                   }
                   return null;
                 },
@@ -505,63 +507,64 @@ class _NewSaleState extends State<NewSale> {
 
   StandardButton _buildSaveButton() {
     return StandardButton(
-        buttonText: 'GERAR VENDA',
-        onPressed: () async {
-          final isValid = _formKey.currentState!.validate();
-          if (isValid) {
-            final clienteNome = _clienteNameCrontoller.text;
-            final clienteDocumento = _clienteDocumentCrontoller.text;
-            final clienteEmail = _clienteEmailCrontoller.text;
-            final clienteTelefone = _clienteNumberCrontoller.text;
+      buttonText: 'GERAR VENDA',
+      onPressed: () async {
+        final isValid = _formKey.currentState!.validate();
+        if (isValid) {
+          final clienteNome = _clienteNameCrontoller.text;
+          final clienteDocumento = _clienteDocumentCrontoller.text;
+          final clienteEmail = _clienteEmailCrontoller.text;
+          final clienteTelefone = _clienteNumberCrontoller.text;
 
-            var cabine = _cabineSelecionada;
-            var operacao = _operacaoSelecionada;
-            var aplicacao = _aplicacaoSelecionada;
-            var eixo = _eixoSelecionado;
-            var chassi = _chassiSelecionado;
+          var cabine = _cabineSelecionada;
+          var operacao = _operacaoSelecionada;
+          var aplicacao = _aplicacaoSelecionada;
+          var eixo = _eixoSelecionado;
+          var chassi = _chassiSelecionado;
 
-            final pesoMax = NumberFormat.decimalPattern()
-                .parse(_pesoMaxController.text)
-                .toDouble();
+          final pesoMax = NumberFormat.decimalPattern()
+              .parse(_pesoMaxController.text)
+              .toDouble();
 
-            final mediaKm = NumberFormat.decimalPattern()
-                .parse(_mediaKmController.text)
-                .toDouble();
+          final mediaKm = NumberFormat.decimalPattern()
+              .parse(_mediaKmController.text)
+              .toDouble();
 
-            final valor = NumberFormat.currency(locale: 'pt_BR')
-                .parse(_valorController.text.replaceAll('R\$', ''))
-                .toDouble();
+          final valor = NumberFormat.currency(locale: 'pt_BR')
+              .parse(_valorController.text.replaceAll('R\$', ''))
+              .toDouble();
 
-            final venda = Sale(
-                valor: valor,
-                nome: clienteNome,
-                documento: clienteDocumento,
-                email: clienteEmail,
-                telefone: clienteTelefone,
-                serie: cabine,
-                operacao: operacao,
-                aplicacao: aplicacao,
-                eixo: eixo,
-                chassi: chassi,
-                pesoMax: pesoMax,
-                mediaKm: mediaKm);
+          final venda = Sale(
+              valor: valor,
+              nome: clienteNome,
+              documento: clienteDocumento,
+              email: clienteEmail,
+              telefone: clienteTelefone,
+              serie: cabine,
+              operacao: operacao,
+              aplicacao: aplicacao,
+              eixo: eixo,
+              chassi: chassi,
+              pesoMax: pesoMax,
+              mediaKm: mediaKm);
 
-            try {
-              if (widget.vendaEditavel != null) {
-                venda.id = widget.vendaEditavel!.id;
-                await _saleRepository.editarVenda(venda);
-              } else {
-                await _saleRepository.gerarVenda(venda);
-              }
-
-              ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(content: Text('Venda gerada com Sucesso!')));
-
-              Navigator.of(context).pop(true);
-            } catch (e) {
-              Navigator.of(context).pop(false);
+          try {
+            if (widget.vendaEditavel != null) {
+              venda.id = widget.vendaEditavel!.id;
+              await _saleRepository.editarVenda(venda);
+            } else {
+              await _saleRepository.gerarVenda(venda);
             }
+
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Venda gerada com Sucesso!')));
+
+            Navigator.of(context).pop(true);
+          } catch (e) {
+            Navigator.of(context).pop(false);
           }
-        });
+        }
+      },
+    );
   }
 }

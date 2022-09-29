@@ -113,7 +113,7 @@ class SaleRepository {
     final db = await DatabaseManager().getDatabase();
 
     return db.update(
-        "venda",
+        'venda',
         {
           "id": sale.id,
           "valor": sale.valor,
@@ -127,7 +127,7 @@ class SaleRepository {
           "eixo": sale.eixo.index,
           "chassi": sale.chassi.index,
           "pesoMax": sale.pesoMax,
-          "mediaKm": sale.mediaKm
+          "mediaKm": sale.mediaKm,
         },
         where: 'id = ?',
         whereArgs: [sale.id]);

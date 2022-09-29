@@ -22,10 +22,11 @@ class MyApp extends StatelessWidget {
       theme: lightTheme,
       routes: {
         '/': (context) => const HomePage(),
+        '/intro-page': (context) => IntroPage(),
         '/new-sale': (context) => NewSale(),
         '/sale-details': (context) => SaleDetailsPage(),
       },
-      initialRoute: '/',
+      initialRoute: '/intro-page',
     );
   }
 }

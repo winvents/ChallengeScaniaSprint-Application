@@ -1,7 +1,9 @@
 import 'package:challengescania_sprint2/src/utils/exports.dart';
 import 'package:flutter/material.dart';
 
-class StandardAppBar extends StatelessWidget {
+class StandardAppBar extends StatelessWidget implements PreferredSizeWidget {
+  const StandardAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -28,4 +30,7 @@ class StandardAppBar extends StatelessWidget {
       ),
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(60);
 }
