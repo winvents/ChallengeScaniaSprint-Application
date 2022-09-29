@@ -3,7 +3,6 @@ import 'package:challengescania_sprint2/src/app/components/grafico_chassi.dart';
 import 'package:challengescania_sprint2/src/app/components/grafico_eixo.dart';
 import 'package:challengescania_sprint2/src/app/components/grafico_operacao.dart';
 import 'package:challengescania_sprint2/src/app/components/grafico_serie.dart';
-import 'package:challengescania_sprint2/src/app/model/types/tipo_eixo.dart';
 import 'package:challengescania_sprint2/src/app/repositories/sale_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -41,6 +40,13 @@ class _SalesDashboardPage extends State<SalesDashboardPage> {
             return SingleChildScrollView(
               child: Column(
                 children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Esta é a Dashboard. É aqui que você pode ver insights sobre as vendas geradas de acordo com cada tipo de módulo personalizável.',
+                      style: TextStyle(fontSize: 18, height: 1.5),
+                    ),
+                  ),
                   OperacaoChart(vendas: vendas),
                   AplicacaoChart(vendas: vendas),
                   SerieChart(vendas: vendas),

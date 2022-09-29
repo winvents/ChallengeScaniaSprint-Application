@@ -50,8 +50,8 @@ class _HomePageState extends State<HomePage> {
               label: 'Dashboard',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history),
-              label: 'Histórico',
+              icon: Icon(Icons.monetization_on),
+              label: 'Vendas',
             ),
           ],
           onTap: (pagina) {

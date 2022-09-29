@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 import '../model/sale.dart';
 
@@ -20,61 +21,117 @@ class _SerieChartState extends State<SerieChart> {
     return AspectRatio(
       aspectRatio: 1.3,
       child: Card(
-        color: Color.fromARGB(255, 20, 16, 72),
-        child: AspectRatio(
-          aspectRatio: 1,
-          child: PieChart(
-            PieChartData(
-              pieTouchData: PieTouchData(
-                  touchCallback: (FlTouchEvent event, pieTouchResponse) {
-                setState(() {
-                  if (!event.isInterestedForInteractions ||
-                      pieTouchResponse == null ||
-                      pieTouchResponse.touchedSection == null) {
-                    touchedIndex = -1;
-                    return;
-                  }
-                  touchedIndex =
-                      pieTouchResponse.touchedSection!.touchedSectionIndex;
-                });
-              }),
-              borderData: FlBorderData(show: false),
-              sectionsSpace: 0,
-              centerSpaceRadius: 60,
-              sections: displayedSections(),
+        color: Color.fromARGB(255, 61, 61, 65),
+        child: Column(
+          children: [
+            const Text(
+              'Série da Cabine',
+              style: TextStyle(fontSize: 18),
             ),
-          ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _buildIndicator(
+                  color: Colors.greenAccent,
+                  text: 'P',
+                  valorTotal: calculoPorcentagemSerie('P'),
+                ),
+                _buildIndicator(
+                  color: Colors.redAccent,
+                  text: 'G',
+                  valorTotal: calculoPorcentagemSerie('G'),
+                ),
+                _buildIndicator(
+                  color: Colors.blueAccent,
+                  text: 'R',
+                  valorTotal: calculoPorcentagemSerie('R'),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: PieChart(
+                  PieChartData(
+                    pieTouchData: PieTouchData(
+                        touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                      setState(() {
+                        if (!event.isInterestedForInteractions ||
+                            pieTouchResponse == null ||
+                            pieTouchResponse.touchedSection == null) {
+                          touchedIndex = -1;
+                          return;
+                        }
+                        touchedIndex = pieTouchResponse
+                            .touchedSection!.touchedSectionIndex;
+                      });
+                    }),
+                    borderData: FlBorderData(show: false),
+                    sectionsSpace: 0,
+                    centerSpaceRadius: 60,
+                    sections: displayedSections(),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 35,
+            ),
+          ],
         ),
       ),
     );
   }
 
   List<PieChartSectionData> displayedSections() {
-    List<PieChartSectionData> sections = [];
-
-    var series = widget.vendas.map((v) => v.serie).toSet().toList();
-
-    for (var i = 0; i < series.length; i++) {
-      final serie = series[i];
+    return List.generate(3, (i) {
       final isTouched = i == touchedIndex;
       final fontSize = isTouched ? 25.0 : 16.0;
       final radius = isTouched ? 60.0 : 50.0;
-      final widgetSize = isTouched ? 55.0 : 40.0;
-
-      sections.add(
-        PieChartSectionData(
-          value: calculoPorcentagemSerie(serie.name),
-          title: '${calculoPorcentagemSerie(serie.name).toStringAsFixed(1)}%',
-          radius: radius,
-          titleStyle: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.bold,
-            color: const Color(0xffffffff),
-          ),
-        ),
-      );
-    }
-    return sections;
+      switch (i) {
+        case 0:
+          return PieChartSectionData(
+            color: Colors.greenAccent,
+            value: calculoPorcentagemSerie('P'),
+            title: '${calculoPorcentagemSerie('P').toStringAsFixed(1)}%',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        case 1:
+          return PieChartSectionData(
+            color: Colors.redAccent,
+            value: calculoPorcentagemSerie('G'),
+            title: '${calculoPorcentagemSerie('G').toStringAsFixed(1)}%',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        case 2:
+          return PieChartSectionData(
+            color: Colors.blueAccent,
+            value: calculoPorcentagemSerie('R'),
+            title: '${calculoPorcentagemSerie('R').toStringAsFixed(1)}%',
+            radius: radius,
+            titleStyle: TextStyle(
+                fontSize: fontSize,
+                fontWeight: FontWeight.bold,
+                color: const Color(0xffffffff)),
+          );
+        default:
+          throw Error();
+      }
+    });
   }
 
   double calculoPorcentagemSerie(String name) {
@@ -97,4 +154,41 @@ class _SerieChartState extends State<SerieChart> {
     double porcentagemPorserie = (contSerie / contTotal) * 100;
     return porcentagemPorserie;
   }
+}
+
+Widget _buildIndicator(
+    {double size = 20,
+    required Color color,
+    required String text,
+    required double valorTotal}) {
+  return Row(
+    children: <Widget>[
+      Container(
+        width: size,
+        height: size,
+        decoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: color,
+        ),
+      ),
+      const SizedBox(
+        width: 10,
+      ),
+      Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text,
+            style: const TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          Text(
+            NumberFormat.decimalPattern().format(valorTotal),
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+        ],
+      )
+    ],
+  );
 }
