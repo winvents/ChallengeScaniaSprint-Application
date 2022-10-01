@@ -29,7 +29,8 @@ class StandardSaleCard extends StatelessWidget {
         top: 20,
       ),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisSize: MainAxisSize.max,
         children: [
           const Image(image: AssetImage('assets/images/caminhao.png')),
           Column(

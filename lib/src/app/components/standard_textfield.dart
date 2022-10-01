@@ -29,6 +29,8 @@ class StandardTextField extends StatelessWidget {
         decoration: InputDecoration(
           label: Text(label),
           border: const OutlineInputBorder(),
+          fillColor: Colors.white,
+          focusColor: Colors.white,
         ),
         style: const TextStyle(color: Colors.white),
         validator: validator,

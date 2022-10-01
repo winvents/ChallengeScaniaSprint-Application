@@ -41,16 +41,40 @@ class _SalesDashboardPage extends State<SalesDashboardPage> {
               child: Column(
                 children: [
                   const Padding(
-                    padding: EdgeInsets.all(8.0),
+                      padding: EdgeInsets.fromLTRB(20, 20, 20, 5),
+                      child: Text('Esta é a Dashboard.',
+                          style: TextStyle(
+                              fontSize: 22,
+                              height: 1.5,
+                              fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.center)),
+                  const Padding(
+                    padding: EdgeInsets.fromLTRB(15, 0, 15, 20),
                     child: Text(
-                      'Esta é a Dashboard. É aqui que você pode ver insights sobre as vendas geradas de acordo com cada tipo de módulo personalizável.',
-                      style: TextStyle(fontSize: 18, height: 1.5),
+                      '\nÉ aqui que você pode ver insights sobre as vendas geradas de acordo com cada tipo de módulo personalizável.',
+                      style: TextStyle(
+                          fontSize: 20,
+                          height: 1.5,
+                          fontWeight: FontWeight.w600),
+                      textAlign: TextAlign.justify,
                     ),
                   ),
                   OperacaoChart(vendas: vendas),
+                  SizedBox(
+                    height: 10,
+                  ),
                   AplicacaoChart(vendas: vendas),
+                  SizedBox(
+                    height: 10,
+                  ),
                   SerieChart(vendas: vendas),
+                  SizedBox(
+                    height: 10,
+                  ),
                   EixoChart(vendas: vendas),
+                  SizedBox(
+                    height: 10,
+                  ),
                   ChassiChart(vendas: vendas)
                 ],
               ),
