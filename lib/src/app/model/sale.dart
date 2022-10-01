@@ -5,19 +5,19 @@ import 'package:challengescania_sprint2/src/app/model/types/tipo_eixo.dart';
 import 'package:challengescania_sprint2/src/app/model/types/tipo_operacao.dart';
 
 class Sale {
-  late final int? id;
-  final double valor;
-  final String nome;
-  final String documento;
-  final String email;
-  final String telefone;
-  final Cabine serie;
-  final Operacao operacao;
-  final Aplicacao aplicacao;
-  final Eixo eixo;
-  final Chassi chassi;
-  final double pesoMax;
-  final double mediaKm;
+  int? id;
+  double valor;
+  String nome;
+  String documento;
+  String email;
+  String telefone;
+  Cabine serie;
+  Operacao operacao;
+  Aplicacao aplicacao;
+  Eixo eixo;
+  Chassi chassi;
+  double pesoMax;
+  double mediaKm;
 
   Sale(
       {this.id,

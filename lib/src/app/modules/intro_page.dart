@@ -54,7 +54,7 @@ class IntroPage extends StatelessWidget {
                 height: 45,
               ),
               const Text(
-                '$welcome user',
+                '$welcome',
                 style: TextStyle(fontSize: 35),
               ),
               const SizedBox(
